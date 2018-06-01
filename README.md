@@ -8,7 +8,7 @@ Tema 2 - Realizata de Urse Daniel
 
 Tema 3 - Realizata de Urse Daniel, Alexandrescu Aurelian, Miron Gabriel, Scurtu Vlad
 
-Tema 4 - Realizata de Urse Daniel, Alexandrescu Aurelian, Miron Gabriel, Scurtu Vlad
+Tema 4 - Realizata de Urse Daniel, Alexandrescu Aurelian, Miron Gabriel
 
 ## PROIECT CLOUD COMPUTING 2018
 
