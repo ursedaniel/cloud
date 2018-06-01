@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    body {
+        text-align: center;
+    }
+</style>
+<body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<label>Text de analizat</label> <br/>
+<textarea placeholder="Text de analizat" id="analisationText"></textarea> <br/>
+<input type="button" value="click" id="button" onclick="translate()">
+<script>
+    function translate() {
+        var text = document.getElementById('analisationText').value;
+
+        data = {
+            "document": {
+                "type": 'PLAIN_TEXT',
+                "language": 'en',
+
+                // Union field source can be only one of the following:
+                "content": text
+                // End of list of possible types for union field source.
+            }
+            , "encodingType": 'UTF16'
+        };
+        $.ajax({
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            dataType: 'json',
+            success: function (data) {
+               response = JSON.stringify(data);
+                $('#button').after('<br/><code style="background-color: yellow;">' + response + '</code>');
+            },
+            error: function () {
+                app.log("Device control failed");
+            },
+            processData: false,
+            type: 'POST',
+            url: 'https://language.googleapis.com/v1beta2/documents:analyzeEntities?key=AIzaSyDNXESHdS0yAvXPYuL1mbPE3DWX82frPg0'
+        });
+    }
+</script>
+</body>
+</html>

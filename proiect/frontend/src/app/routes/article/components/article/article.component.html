@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="col-lg-3" style="margin: 0 auto; display: block;     margin-left: 35%;">
+
+    <!-- Traffic sources -->
+    <div class="panel panel-flat">
+      <div class="panel-heading">
+        <h2 class="panel-title align-center">Vizualizare anunt</h2>
+      </div>
+
+      <!--<div id="map" style="height:600px;width:100%;"></div>-->
+
+      <label>Perioada:</label> <span>{{article.interval}}</span> <br/>
+      <label>Pret:</label> <span>{{article.price}} (lei)</span> <br/>
+      <label>Descriere:</label> <span>{{article.description}}</span> <br/>
+      <label>Nr. raporturi:</label> <span>{{article.nr_reports}}</span> <br/>
+      <label>Rezervat de:</label> <span>{{article.chirias}}</span> <br/>
+
+      <input type="text" placeholder="Introdu nr minute" class="form-input" [(ngModel)]="interval" /> <br/> <br/>
+
+      <button type="submit" class="btn btn-primary align-center margin-left margin-bottom" (click)="reserve()">REZERVA <i class="icon-circle-right2 position-right"></i></button>
+      <button type="submit" class="btn btn-secondary red align-center margin-bottom" (click)="report()">RAPORTEAZA <i class="icon-circle-right2 position-right"></i></button>
+
+    </div>
+    <!-- /traffic sources -->
+
+  </div>
+
+</div>

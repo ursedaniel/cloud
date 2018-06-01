@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="col-lg-3" style="margin: 0 auto; display: block;     margin-left: 35%;">
+
+    <!-- Traffic sources -->
+    <div class="panel panel-flat">
+      <div class="panel-heading">
+        <h2 class="panel-title align-center">Detalii cont</h2>
+      </div>
+
+      <!--<div id="map" style="height:600px;width:100%;"></div>-->
+
+      <label>Email:</label> <span>{{user.email}}</span> <br/>
+      <label>CNP:</label> <span>{{user.cnp}}</span> <br/>
+      <label>Nr. inmatriculare:</label> <span>{{user.nrinm}}</span> <br/>
+      <label>Balanta:</label> <span>{{user.balance}}</span> <br/>
+
+      <input type="text" placeholder="Depunere suma" class="form-input" [(ngModel)]="balance" /> <br/> <br/>
+
+      <button type="submit" class="btn btn-primary align-center margin-bottom" (click)="update()">UPDATE <i class="icon-circle-right2 position-right"></i></button>
+
+    </div>
+    <!-- /traffic sources -->
+
+  </div>
+
+</div>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    body {
+        text-align: center;
+    }
+</style>
+<body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<label>Text</label> <br/>
+<input type="text" placeholder="Text de tradus" id="translationText"> <br/>
+<input type="button" value="click" id="button" onclick="translate()">
+<script>
+    function translate() {
+        var text = document.getElementById('translationText').value;
+        language = 'ro';
+        data = {
+            "q": text,
+            "target": 'en'
+        };
+        $.ajax({
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            dataType: 'json',
+            success: function (data) {
+                var translatedText = data.data.translations[0].translatedText;
+                $('#button').after('<br/><span>Text tradus:' + translatedText + '</span>');
+            },
+            error: function () {
+                app.log("Device control failed");
+            },
+            processData: false,
+            type: 'POST',
+            url: 'https://translation.googleapis.com/language/translate/v2?key=AIzaSyDNXESHdS0yAvXPYuL1mbPE3DWX82frPg0'
+        });
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>KeyPhrases</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<style>
+    body {
+        text-align: center;
+    }
+</style>
+<script>
+    function translateMain() {
+
+        let https = require ('https');
+
+        let accessKey = '866df2b9dd3041199e9a8154bc48f1b1';
+
+        let uri = 'westus.api.cognitive.microsoft.com';
+        let path = '/text/analytics/v2.0/keyPhrases';
+
+        let response_handler = function (response) {
+            let body = '';
+            response.on ('data', function (d) {
+                body += d;
+            });
+            response.on ('end', function () {
+                let body_ = JSON.parse (body);
+                let body__ = JSON.stringify (body_, null, '  ');
+                console.log (body__);
+            });
+            response.on ('error', function (e) {
+                console.log ('Error: ' + e.message);
+            });
+        };
+
+        let get_key_phrases = function (documents) {
+            let body = JSON.stringify (documents);
+
+            let request_params = {
+                method : 'POST',
+                hostname : uri,
+                path : path,
+                headers : {
+                    'Ocp-Apim-Subscription-Key' : accessKey,
+                }
+            };
+
+            let req = https.request (request_params, response_handler);
+            req.write (body);
+            req.end ();
+        }
+
+        let documents = { 'documents': [
+            { 'id': '1', 'language': 'en', 'text': 'I really enjoy the new XBox One S. It has a clean look, it has 4K/HDR resolution and it is affordable.' },
+            { 'id': '2', 'language': 'es', 'text': 'Si usted quiere comunicarse con Carlos, usted debe de llamarlo a su telefono movil. Carlos es muy responsable, pero necesita recibir una notificacion si hay algun problema.' },
+            { 'id': '3', 'language': 'en', 'text': 'The Grand Hotel is a new hotel in the center of Seattle. It earned 5 stars in my review, and has the classiest decor I\'ve ever seen.' }
+        ]};
+
+        get_key_phrases (documents);
+    }
+
+    function keyPhrases() {
+
+
+        let accessKey = '74a6743ff7b54d9fa17994f2516482f8';
+
+//        data = { 'documents': [
+//            { 'id': '1', 'language': 'ro', 'text': 'I really enjoy the new XBox One S. It has a clean look, it has 4K/HDR resolution and it is affordable.' },
+//            { 'id': '2', 'language': 'ro', 'text': 'Si usted quiere comunicarse con Carlos, usted debe de llamarlo a su telefono movil. Carlos es muy responsable, pero necesita recibir una notificacion si hay algun problema.' },
+//            { 'id': '3', 'language': 'ro', 'text': 'The Grand Hotel is a new hotel in the center of Seattle. It earned 5 stars in my review, and has the classiest decor I\'ve ever seen.' }
+//        ]};
+
+        data = { 'documents': []};
+
+        data.documents.push({id:1, language: 'en', text: $( "#text1" ).val()});
+        data.documents.push({id:2, language: 'en', text: $( "#text2" ).val()});
+
+        $.ajax({
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            headers: {
+                'Ocp-Apim-Subscription-Key' : accessKey
+            },
+            dataType: 'json',
+            success: function (data) {
+                response = JSON.stringify(data, null, 2);
+                $('#button').after('<br/> <br/><textarea style="width:580px; height:400px;">' + response + '</textarea>');
+            },
+            error: function () {
+                app.log("Device control failed");
+            },
+            processData: false,
+            type: 'POST',
+            url: 'https://westcentralus.api.cognitive.microsoft.com/text/analytics/v2.0/entities'
+        });
+    }
+
+</script>
+<body>
+<label>Text 1</label>
+<input type="text" id="text1" style="width:380px; height:50px;"/> <br/>
+<label>Text 2</label>
+<input type="text" id="text2" style="width:380px; height:50px;"/> <br/> <br/>
+<button id="button" onclick="keyPhrases()">ANALIZEAZA</button>
+</body>
+</html>

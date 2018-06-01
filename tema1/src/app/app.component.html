@@ -1,0 +1,94 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h1 style="color:limegreen">
+    Tema 1 - Cloud Computing [URSE DANIEL 3B4]
+  </h1>
+
+  <h3>Lista APIs</h3>
+  <div>
+    <a href="https://market.mashape.com/andruxnet/random-famous-quotes" target="_blank" style="text-decoration: none">Random
+      Famous Quotes</a> <br/>
+    <a href="https://market.mashape.com/seikan/img4me-text-to-image-service" target="_blank"
+       style="text-decoration: none">IMG4Me - Text to Image Service</a> <br/>
+    <a href="https://ocr.space/ocrapi" target="_blank" style="text-decoration: none">OCR API</a> <br/>
+  </div>
+
+  <h2>Numarul total de requests: <span style="color:#48cdc1">{{count}}</span></h2>
+  <h2>Numarul concurent de requests: <span style="color:#48cdc1">{{concurent}}</span></h2>
+
+  <br/>
+  <h2><span style="color:#48cdc1">1.</span> Generarea unui citat</h2>
+
+  <div>
+    <span>Alege un domeniu:</span>
+    <select [(ngModel)]="category" (change)="submitCategory()">
+      <option value="movies">Movies</option>
+      <option value="famous">Famous</option>
+    </select>
+  </div>
+
+  <br/>
+  <div *ngIf="firstResponse != ''">
+    <strong>Request log:</strong> <br/>
+    <code>
+      {{firstResponse}}
+    </code> <br/>
+    <div *ngIf="firstResponseStatus == 1"><strong>Status:</strong> <span [class.succes]="firstResponseStatus == 1"> 200 OK</span><br/>
+    </div>
+    <div *ngIf="firstResponseStatus == 0"><strong>Status:</strong> <span
+      [class.error]="firstResponseStatus == 0"> 403</span><br/></div>
+    <strong>Timp executie:</strong> {{firstDuration}}ms <br/>
+    <strong>Citat folosit:</strong><br/>
+    <span>{{quote}}</span>
+
+    <br/> <br/>
+    <h2><span style="color:#48cdc1">2.</span> Transformarea citatului in imagine</h2>
+    <label>Culoare fundal (hexa)</label> <input value="{{bcolor}}" [(ngModel)]="bcolor"> <br/>
+    <label>Culoare text (hexa)</label> <input value="{{fcolor}}" [(ngModel)]="fcolor"><br/>
+    <label>Font</label> <input value="{{font}}" [(ngModel)]="font"><br/>
+    <label>Dimensiune font</label> <input value="{{size}}" [(ngModel)]="size"><br/>
+    <label>Text</label> <textarea value="{{quote}}" [disabled]="true"></textarea><br/>
+    <label>Tip poza</label>
+    <select [(ngModel)]="type">
+      <option value="png" selected>png</option>
+      <option value="jpg">jpg</option>
+    </select> <br/><br/>
+    <button (click)="generateImage()" style="margin-bottom:10px;">GENEREAZA!</button>
+
+    <br/><br/>
+    <strong>Request log:</strong> <br/>
+    <code>
+      {{secondResponse}}
+    </code> <br/>
+    <div *ngIf="secondResponseStatus == 1"><strong>Status:</strong> <span [class.succes]="secondResponseStatus == 1"> 200 OK</span><br/>
+    </div>
+    <div *ngIf="secondResponseStatus == 0"><strong>Status:</strong> <span
+      [class.error]="secondResponseStatus == 0"> 403</span><br/></div>
+    <strong>Timp executie:</strong> {{secondDuration}}ms <br/>
+    <strong>Imagine:</strong><br/>
+    <a href="{{imageUrl}}" target="_blank"><img src="{{imageUrl}}"></a>
+  </div>
+
+  <div *ngIf="secondResponse != ''">
+    <br/>
+    <h2><span style="color:#48cdc1">3.</span> Extragerea textului din imagine</h2>
+    <button (click)="decriptPhoto()" style="margin-bottom:15px;">EXTRAGE!</button>
+    <br/>
+    <div *ngIf="thirdResponse != ''">
+      <strong>Request log:</strong> <br/>
+      <code>
+        {{thirdResponse}}
+      </code> <br/>
+      <div *ngIf="thirdResponseStatus == 1"><strong>Status:</strong> <span [class.succes]="thirdResponseStatus == 1"> 200 OK</span><br/>
+      </div>
+      <div *ngIf="thirdResponseStatus == 0"><strong>Status:</strong> <span
+        [class.error]="thirdResponseStatus == 0"> 403</span><br/></div>
+      <strong>Timp executie:</strong> {{thirdDuration}}ms <br/>
+      <strong *ngIf="thirdResponseStatus == 1">Text extras:</strong><br/>
+      <span *ngIf="thirdResponseStatus == 1">{{decriptedText}}</span>
+    </div>
+  </div>
+
+</div>
+
+

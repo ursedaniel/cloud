@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    body {
+        text-align: center;
+    }
+</style>
+<body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<label>Poza</label> <br/>
+<input type="text" placeholder="Url poza" id="analisationText"> <br/>
+<input type="button" value="click" id="button" onclick="analyze()">
+<script>
+    function analyze() {
+        var url = document.getElementById('analisationText').value;
+
+        data = {
+            "requests": [
+                {
+                    "image": {
+                        "source":
+                            {
+                                "imageUri": url
+                            }
+                    },
+                    "features": [
+                        {
+                            "type": 'FACE_DETECTION'
+                        }
+                    ]
+                }
+            ]
+        };
+        $.ajax({
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            dataType: 'json',
+            success: function (data) {
+                response = JSON.stringify(data);
+                $('#button').after('<br/><code style="background-color: yellow;">' + response + '</code>');
+            },
+            error: function () {
+                app.log("Device control failed");
+            },
+            processData: false,
+            type: 'POST',
+            url: 'https://vision.googleapis.com/v1/images:annotate?key=AIzaSyDNXESHdS0yAvXPYuL1mbPE3DWX82frPg0'
+        });
+    }
+</script>
+</body>
+</html>

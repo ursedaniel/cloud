@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    body {
+        text-align: center;
+    }
+</style>
+<body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<label>Vizualizeaza logurile</label> <br/>
+<input type="button" value="click" id="button" onclick="logs()">
+<script>
+    function logs() {
+
+
+        $.ajax({
+            contentType: 'application/json',
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+                var translatedText = data;
+                $('#button').after('<br/><span>Text tradus:' + translatedText + '</span>');
+            },
+            error: function () {
+                app.log("Device control failed");
+            },
+            processData: false,
+            type: 'GET',
+            url: 'https://logging.googleapis.com/v2/project/tema-3-200116/exclusions?key=AIzaSyDNXESHdS0yAvXPYuL1mbPE3DWX82frPg0'
+        });
+    }
+</script>
+</body>
+</html>

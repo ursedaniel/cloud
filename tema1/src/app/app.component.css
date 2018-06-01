@@ -1,0 +1,19 @@
+code {
+  background-color: #ffff006b;
+}
+
+label {
+  font-weight: bold;
+  color: black;
+  padding-right: 5px;
+}
+
+.succes {
+  color: #6cd87b;
+  font-weight: bold;
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+}

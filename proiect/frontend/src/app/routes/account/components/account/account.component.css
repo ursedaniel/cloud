@@ -1,0 +1,23 @@
+.panel {
+  font-size: 1.5em;
+  padding-left: 20px;
+}
+
+.align-center {
+  text-align: center;
+  margin: 0 auto;
+}
+
+.red {
+  background-color: red;
+  color: white;
+  padding-right: 10px;
+}
+
+.margin-left {
+  margin-left: 55px;
+}
+
+.margin-bottom {
+  margin-bottom: 20px;
+}

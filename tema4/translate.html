@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Translate</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<style>
+    body {
+        text-align: center;
+    }
+</style>
+<script>
+
+    function translateText() {
+
+        text = document.getElementById('insertTextArea').value;
+
+        let subscriptionKey = '2641a00847204384aeb740561b820379';
+
+        data = [{'Text' : text}];
+
+        let get_guid = function () {
+            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+            });
+        };
+
+        $.ajax({
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            headers: {
+                'Content-Type' : 'application/json',
+                'Ocp-Apim-Subscription-Key' : subscriptionKey,
+                'X-ClientTraceId' : get_guid (),
+            },
+            dataType: 'json',
+            success: function (data) {
+                response = JSON.stringify(data);
+                $('#button').after('<br/><code style="background-color: yellow;">' + response + '</code>');
+            },
+            error: function () {
+                app.log("Device control failed");
+            },
+            processData: false,
+            type: 'POST',
+            url: 'https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&to=de&to=it'
+        });
+    }
+
+</script>
+<body>
+<textarea id="insertTextArea"  class="UIInput"
+          style="width:380px; height:100px;">Introdu text</textarea> <br/>
+<button id="button" onclick="translateText()">TRADU</button>
+</body>
+</html>
